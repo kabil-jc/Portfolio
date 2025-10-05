@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kabilan Mahadevan — Portfolio</title>
+  <meta name="description" content="Interactive one-page portfolio for Kabilan Mahadevan — Java Full Stack / SDE entry-level developer." />
+  <!-- GSAP + ScrollTrigger CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --accent:#6ee7b7; --muted:#94a3b8; --glass: rgba(255,255,255,0.04);
+      --maxw:1100px; font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#071024 0%, #07102a 60%);color:#e6eef8}
+    a{color:var(--accent);text-decoration:none}
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:48px 20px}
+
+    /* HERO */
+    header{display:grid;grid-template-columns:1fr 420px;gap:32px;align-items:center;padding:24px 0}
+    .intro{padding:28px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:14px;box-shadow:0 6px 30px rgba(2,6,23,0.6);position:relative;overflow:hidden}
+    .profile-pic{width:120px;height:120px;border-radius:50%;object-fit:cover;position:absolute;top:20px;right:20px;border:3px solid var(--accent);box-shadow:0 0 20px rgba(110,231,183,0.3)}
+    .name{font-size:clamp(28px,4.6vw,40px);margin:0 0 8px}
+    .role{color:var(--muted);margin:0 0 16px}
+    .tag{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(110,231,183,0.08);color:var(--accent);font-weight:600}
+    .lead{line-height:1.5;color:#cfe7f0}
+    .cta{display:flex;gap:12px;margin-top:18px}
+    .btn{background:linear-gradient(90deg,var(--accent),#34d399);padding:10px 16px;border-radius:12px;color:#022;cursor:pointer;border:none;font-weight:700}
+    .secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px 14px;border-radius:12px;color:var(--muted);cursor:pointer}
+    .hero-card{padding:20px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:inset 0 1px 0 rgba(255,255,255,0.02)}
+    .contact-list{display:flex;flex-direction:column;gap:8px}
+    .chip{background:var(--glass);padding:10px;border-radius:10px;color:var(--muted);font-size:14px}
+
+    /* SECTIONS */
+    section{margin-top:36px}
+    .section-head{display:flex;align-items:end;gap:12px}
+    .section-head h2{margin:0;font-size:20px}
+    .timeline{margin-top:18px;border-left:2px dashed rgba(255,255,255,0.04);padding-left:20px}
+    .event{position:relative;padding:18px 18px 18px 36px;margin-bottom:22px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border-radius:10px}
+    .event:before{content:'';width:12px;height:12px;border-radius:50%;background:var(--accent);position:absolute;left:-8px;top:24px}
+    .event h3{margin:0 0 6px;font-size:16px}
+    .muted{color:var(--muted);font-size:14px}
+
+    /* SKILLS */
+    .skills{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+    .skill{padding:14px;border-radius:10px;background:rgba(255,255,255,0.02);text-align:center}
+    .skill h4{margin:8px 0 6px}
+    .bar{height:8px;background:rgba(255,255,255,0.03);border-radius:999px;overflow:hidden}
+    .bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#60a5fa)}
+
+    /* PROJECTS */
+    .projects{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:12px}
+    .proj{padding:16px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);transition:transform .25s ease, box-shadow .25s ease}
+    .proj:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(2,6,23,0.6)}
+
+    /* FOOTER / CONTACT */
+    footer{display:flex;flex-direction:column;gap:12px;padding:20px;border-radius:12px;background:rgba(255,255,255,0.02);margin-top:28px}
+    .socials{display:flex;gap:12px}
+
+    /* RESPONSIVE */
+    @media (max-width:960px){header{grid-template-columns:1fr} .projects{grid-template-columns:1fr} .skills{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width:520px){.skills{grid-template-columns:1fr} .intro{padding:18px} header{padding:10px 0}}
+
+    /* Small flourish */
+    .accent-bg{position:fixed;right:-120px;top:10vh;width:420px;height:420px;border-radius:50%;filter:blur(56px);background:linear-gradient(180deg, rgba(110,231,183,0.18), rgba(96,165,250,0.06));z-index:0}
+  </style>
+</head>
+<body>
+  <div class="accent-bg" aria-hidden="true"></div>
+  <div class="wrap">
+    <header>
+      <div class="intro hero-card">
+        <img src="Profile.jpg" alt="Kabilan Mahadevan" class="profile-pic" />
+        <span class="tag">Entry-Level Software Developer</span>
+        <h1 class="name">Kabilan Mahadevan</h1>
+        <p class="role">Java • JavaScript • Full‑stack Enthusiast</p>
+        <p class="lead">I craft readable, maintainable code and love turning data-driven ideas into working software. Recent work includes machine learning pipelines for medical imaging and responsive web pages for production sites. This one‑page portfolio converts my resume into an interactive narrative — scroll to explore.</p>
+        <div class="cta">
+          <button class="btn" id="downloadResume">Download Resume</button>
+          <a class="secondary" href="#contact">Contact</a>
+        </div>
+      </div>
+
+      <aside class="hero-card">
+        <h3 style="margin-top:0">Contact</h3>
+        <div class="contact-list">
+          <div class="chip">Kabilan Mahadevan</div>
+          <div class="chip">Email: <a href="mailto:kabilankabilan11107@gmail.com">kabilankabilan11107@gmail.com</a></div>
+          <div class="chip">Phone: <a href="tel:+919677649819">+91 96776 49819</a></div>
+          <div class="chip">GitHub: <a href="https://github.com/kabil-jc" target="_blank">github.com/kabil-jc</a></div>
+          <div class="chip">LinkedIn: <a href="https://www.linkedin.com/in/kabilan-mahadevan-27028b24b/" target="_blank">kabilan-mahadevan</a></div>
+        </div>
+      </aside>
+    </header>
+
+    <!-- Narrative Timeline (Education -> Internship -> Projects) -->
+    <section id="timeline">
+      <div class="section-head"><h2>Journey — Education & Experience</h2><div class="muted">A short timeline that tells the story</div></div>
+      <div class="timeline">
+        <article class="event">
+          <h3>BE in Electronics & Communication — Nandha College of Technology</h3>
+          <div class="muted">Nov 2021 — May 2025 • Erode, Tamil Nadu • CGPA: 7.0</div>
+          <p>Built a firm foundation in OOP, data structures and system design during my undergraduate studies. Focused on applying software skills to engineering problems.</p>
+        </article>
+
+        <article class="event">
+          <h3>Web Development Intern — Six Phrase Veranda</h3>
+          <div class="muted">May 2024 — Sep 2024</div>
+          <p>Worked on responsive pages using HTML, CSS, JavaScript and Bootstrap. Collaborated with senior devs to reduce load times by 30% and refactored legacy code.</p>
+        </article>
+
+        <article class="event">
+          <h3>Detection of Diabetic Retinopathy (GLCM + ML)</h3>
+          <div class="muted">Academic / Project</div>
+          <p>Extracted texture features from 500+ retinal images using GLCM and built classifiers (Decision Tree, Random Forest, XGBoost) reaching ~85% accuracy. See project for details and repo link in Projects section.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <div class="section-head"><h2>Skills</h2><div class="muted">A compact snapshot of the tools I use</div></div>
+      <div class="skills">
+        <div class="skill">
+          <h4>Languages</h4>
+          <div class="muted">C · Java · JavaScript · PHP</div>
+          <div class="bar" style="margin-top:10px"><i style="width:85%"></i></div>
+        </div>
+        <div class="skill">
+          <h4>Web & Backend</h4>
+          <div class="muted">Servlets · JSP · JDBC · Spring (learning) · PHP</div>
+          <div class="bar" style="margin-top:10px"><i style="width:72%"></i></div>
+        </div>
+        <div class="skill">
+          <h4>Data & Tools</h4>
+          <div class="muted">MySQL · OpenCV · scikit-learn · Git · IntelliJ · VS Code</div>
+          <div class="bar" style="margin-top:10px"><i style="width:75%"></i></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+      <div class="section-head"><h2>Projects</h2><div class="muted">Work that shows what I can build</div></div>
+      <div class="projects">
+        <article class="proj">
+          <h3>Detection of Diabetic Retinopathy using GLCM</h3>
+          <p class="muted">Python • OpenCV • scikit-learn • XGBoost</p>
+          <p>Extracted texture features from 500+ retinal images, automated feature pipeline and evaluated models with cross-validation to ensure robust performance. Achieved ~85% accuracy.</p>
+          <p><a href="https://github.com/kabil-jc/Detection-Of-Diabetic-Retinopathy-on-eye-disease-using-gray-level-co-occurence-matrix" target="_blank">View on GitHub</a></p>
+        </article>
+
+        <article class="proj">
+          <h3>Java Console Apps — Music Player & Contact Manager</h3>
+          <p class="muted">Java • OOP • File I/O</p>
+          <p>Built console-based applications to practice core OOP and data handling — focused on clean code and modular design.</p>
+          <p><a href="https://github.com/kabil-jc" target="_blank">More projects on GitHub</a></p>
+        </article>
+
+        <article class="proj">
+          <h3>Responsive Web Pages (Internship)</h3>
+          <p class="muted">HTML • CSS • JavaScript • Bootstrap</p>
+          <p>Developed and styled 10+ responsive pages and improved page load time through optimizations and code refactors during my internship.</p>
+        </article>
+
+        <article class="proj">
+          <h3>Portfolio Website (This Page)</h3>
+          <p class="muted">HTML • CSS • JavaScript • GSAP</p>
+          <p>A narrative-driven single page that converts my resume into an animated, interactive experience. Built to be responsive and easy to customize.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Contact / Footer -->
+    <section id="contact">
+      <div class="section-head"><h2>Contact</h2><div class="muted">Let’s build something together</div></div>
+      <footer>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+          <div>
+            <strong>Kabilan Mahadevan</strong>
+            <div class="muted">BE ECE — Aspiring Java Full‑Stack / SDE</div>
+          </div>
+          <div style="margin-left:auto" class="socials">
+            <a href="https://github.com/kabil-jc" target="_blank">GitHub</a>
+            <a href="https://www.linkedin.com/in/kabilan-mahadevan-27028b24b/" target="_blank">LinkedIn</a>
+            <a href="mailto:kabilankabilan11107@gmail.com">Email</a>
+          </div>
+        </div>
+
+        <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div class="chip">Phone: +91 96776 49819</div>
+          <div class="chip">Location: Tiruppur, Tamil Nadu</div>
+        </div>
+      </footer>
+    </section>
+
+  </div>
+
+  <script>
+    // wire up resume download (uses resume file embedded as link path)
+    document.getElementById('downloadResume').addEventListener('click',()=>{
+      // if you host this file next to resume PDF named 'kabilan__5_resume.pdf' this will download it
+      const url = './kabilan__5_resume.pdf';
+      const a = document.createElement('a'); a.href = url; a.download = 'Kabilan_Mahadevan_Resume.pdf'; document.body.appendChild(a); a.click(); a.remove();
+    });
+
+    // GSAP Animations
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.from('.hero-card',{y:20,opacity:0,duration:0.8,stagger:0.12,ease:'power2.out'});
+
+    gsap.utils.toArray('.event').forEach((el,i)=>{
+      gsap.from(el,{y:40,opacity:0,duration:0.8,delay:i*0.08,scrollTrigger:{trigger:el,start:'top 80%'}});
+    });
+
+    gsap.utils.toArray('.skill').forEach((el,i)=>{
+      gsap.from(el,{y:20,opacity:0,duration:0.6,delay:i*0.06,scrollTrigger:{trigger:el,start:'top 90%'}});
+    });
+
+    gsap.utils.toArray('.proj').forEach((el,i)=>{
+      gsap.from(el,{y:30,opacity:0,duration:0.8,delay:i*0.06,scrollTrigger:{trigger:el,start:'top 90%'}});
+      // hover micro animation
+      el.addEventListener('mouseenter',()=>gsap.to(el,{scale:1.02,duration:0.25}));
+      el.addEventListener('mouseleave',()=>gsap.to(el,{scale:1,duration:0.25}));
+    });
+
+    // small parallax for accent blob
+    gsap.to('.accent-bg',{yPercent:-8,scrollTrigger:{trigger:document.body,start:'top top',end:'bottom top',scrub:0.6}});
+
+    // accessible reduced-motion check
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(prefersReduced){gsap.globalTimeline.timeScale(0.0);} // effectively reduce animations
+  </script>
+</body>
+</html>
